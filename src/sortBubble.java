@@ -8,35 +8,60 @@
  */
 public class sortBubble
 {
+	int [] tablica;
+	public sortBubble(int [] tablica)
+	{
+		this.tablica=tablica;
+	}
+	
 	/*
 	 *	Sortuje tablice uzywajac bubble sorta, czyli porownoje kolejne elementy, az do momentu, kiedy nie zostanie 
 	 *	dokonana zadna zmiana przy przejsiu tablicy. 
 	 */
-	public static void sortuj(int [] dosortu)
+	public void sortuj()
 	{
 		boolean zamienione = true;
 		while(zamienione)
 		{
 			zamienione=false;
-			for (int i = 0; i < dosortu.length-1; i++)
+			for (int i = 0; i < tablica.length-1; i++)
 			{
-				if(dosortu[i]>dosortu[i+1])
+				if(tablica[i]>tablica[i+1])
 				{	
 					zamienione=true;
-					dosortu[i]^=dosortu[i+1];
-					dosortu[i+1]^=dosortu[i];
-					dosortu[i]^=dosortu[i+1];
+					tablica[i]^=tablica[i+1];
+					tablica[i+1]^=tablica[i];
+					tablica[i]^=tablica[i+1];
 				}
 			}
 		}
 	}
 	
+	/*
+	 * wypisuje elementy tablicy
+	 */
+	public void wypisz()
+	{
+		for(int i=0;i<tablica.length;i++)
+			System.out.println(tablica[i]);
+	}
+	
 	public static void main(String[] args)
 	{
-		int [] tablica = {9,8,7,6,5,4,3,2,1};
-		sortuj(tablica);
-		for (int i = 0; i < tablica.length; i++)
-			System.out.println(tablica[i]);
+		int [] tab = new int [10];
+		tab[0]=-10;
+		tab[1]=3;
+		tab[2]=6;
+		tab[3]=-7;
+		tab[4]=-2;
+		tab[5]=123;
+		tab[6]=-4;
+		tab[7]=5;
+		tab[8]=2;
+		tab[9]=6;
+		sortBubble pierwsza = new sortBubble(tab);
+		pierwsza.sortuj();
+		pierwsza.wypisz();
 	}
 }
 
