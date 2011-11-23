@@ -1,6 +1,8 @@
 /**
  * 
  */
+ 
+import java.util.Random;
 
 /**
  * @author adam
@@ -8,13 +10,27 @@
  */
 public class Sort
 {
-	int [] tablica;
-	public Sort(int [] tablica)
+	private int [] tab;
+	private Random rand;
+	
+	public Sort(int [] tab)
 	{
-		this.tablica=tablica;
+		this.tab=tab;
+		this.rand = new Random();
 	}
 	
-	/*
+	/**
+	 * Zamienia dwa elementy tablicy
+	 */
+	private void swap(int a,int b)
+	{
+		int temp = tab[a];
+		tab[a] = tab[b];
+		tab[b] = temp;
+	}
+		
+	
+	/**
 	 *	Sortuje tablice uzywajac bubble sorta, czyli porownoje kolejne elementy, az do momentu, kiedy nie zostanie 
 	 *	dokonana zadna zmiana przy przejsiu tablicy. 
 	 */
@@ -24,20 +40,14 @@ public class Sort
 		while(zamienione)
 		{
 			zamienione=false;
-			for (int i = 0; i < tablica.length-1; i++)
-			{
-				if(tablica[i]>tablica[i+1])
-				{	
-					zamienione=true;
-					tablica[i]^=tablica[i+1];
-					tablica[i+1]^=tablica[i];
-					tablica[i]^=tablica[i+1];
-				}
-			}
+			for (int i = 0; i < tab.length-1; i++)
+				if(tab[i]>tab[i+1])
+					swap(i,i+1);
+			
 		}
 	}
 	
-	/*
+	/**
 	 * Metoda sortujaca tablice za pomoca algorytmu quicksort.
 	 */
 	
@@ -47,16 +57,16 @@ public class Sort
 			return;
 		int b1  = b;
 		int e1 = e;
-		int i = tablica[b];	//jak sie w Javie losuje jakas wartosc?
+		int i = tab[b];	//jak sie w Javie losuje jakas wartosc?
 		while(b < e)
 		{
-			while(tablica[b]<=i)
+			while(tab[b]<=i)
 				b++;
-			while(tablica[e]>i)
+			while(tab[e]>i)
 				e--;
-			tablica[b]^=tablica[e];
-			tablica[e]^=tablica[b];
-			tablica[b]^=tablica[e];
+			tab[b]^=tab[e];
+			tab[e]^=tab[b];
+			tab[b]^=tab[e];
 		}
 		if(b==e)
 			{quicksort(b1,b-1); quicksort(e,e1);}
@@ -64,13 +74,13 @@ public class Sort
 			{quicksort(b1,b-1); quicksort(e+1,e1);}
 	}
 	
-	/*
+	/**
 	 * wypisuje elementy tablicy
 	 */
 	public void wypisz()
 	{
-		for(int i=0;i<tablica.length;i++)
-			{System.out.print(tablica[i]); System.out.print(" ");}
+		for(int i=0;i<tab.length;i++)
+			{System.out.print(tab[i]); System.out.print(" ");}
 	}
 	
 	public static void main(String[] args)
@@ -87,6 +97,7 @@ public class Sort
 		tab[8]=2;
 		tab[9]=6;
 		int [] tab1 = tab;
+		
 		Sort bubblesort = new Sort(tab);
 		bubblesort.bubblesort();
 		bubblesort.wypisz();
